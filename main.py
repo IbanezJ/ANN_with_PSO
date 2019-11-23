@@ -20,13 +20,5 @@ if __name__ == "__main__":
         pso.train(X, Y, layers)
     new_ann = NeuralNetwork(X, Y, [(4, sigmoid), (1, sigmoid)], list(pso.best))
     new_ann.feed_forward()
-    print("PSO BEST =")
-    print(pso.best)
     print("FINAL ANN OUTPUT =")
     print(new_ann.output)
-
-    """
-    [ 0.04959152  0.61688732  0.96189469  0.01402569 -0.29641678 -0.9668396
-    -0.35432748 -0.96222846  0.21140214  0.1106617   0.63547942 -0.22265218
-    -0.70206729 -0.6996286  -0.7496279   0.77079024]
-    """

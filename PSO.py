@@ -35,10 +35,14 @@ class PSO:
         for particle in self.pop:
             new_ann = NeuralNetwork(X, Y, layers, list(particle.pos))
             new_ann.feed_forward()
-            print("CURRENT ANN OUTPUT =", new_ann.output)
+            print("CURRENT ANN OUTPUT =")
+            print(new_ann.output)
+            print("DESIRED OUTPUT =")
+            print(Y)
             fitness = (np.sum((Y - new_ann.output) ** 2)) / 4
             self.fitness = fitness
-            print("CURRENT FITNESS =", fitness)
+            print("CURRENT FITNESS (mean squared error) =")
+            print(fitness)
 
             if self.best_fitness_value is None or fitness < self.best_fitness_value:
                 self.best = particle.pos
