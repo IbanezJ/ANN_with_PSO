@@ -1,27 +1,22 @@
 import numpy as np
 
-from ArtificialNeuralNetwork import ArtificialNeuralNetwork
 from PSO import PSO
 from NeuralNetwork import NeuralNetwork, sigmoid
 
 if __name__ == "__main__":
-    ann = ArtificialNeuralNetwork(3, 2, [4, 1], [sigmoid, sigmoid])
-    print(ann.feed_forward([0, 0, 1]))
-    print(ann.weights)
-
-    new_ann = ArtificialNeuralNetwork(3, 2, [4, 1], [sigmoid, sigmoid], ann.get_weights_as_vector())
-    print(ann.layers[-1])
-
-    pso = PSO(len(ann.get_weights_as_vector()), 50, 0.5, 2.0, 2.0, 1.0)
-
-    for _ in range(100):
-        pso.train()
 
     X = np.array([[0, 0, 1],
                   [0, 1, 1],
                   [1, 0, 1],
                   [1, 1, 1]])
     y = np.array([[0], [1], [1], [0]])
+
+    ann = NeuralNetwork(X, y, [(4, sigmoid), (1, sigmoid)])
+
+    pso = PSO(len(ann.get_weights_as_vector()), 50, 0.5, 2.0, 2.0, 1.0)
+
+    while pso.fitness != 0:
+        pso.train()
     new_ann = NeuralNetwork(X, y, [(4, sigmoid), (1, sigmoid)], list(pso.best))
     print("THIS =", list(pso.best))
     print("AND THIS =", new_ann.weights)

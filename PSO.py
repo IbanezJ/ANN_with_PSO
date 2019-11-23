@@ -2,7 +2,6 @@ import random
 
 import numpy as np
 
-from ArtificialNeuralNetwork import ArtificialNeuralNetwork
 from NeuralNetwork import NeuralNetwork, sigmoid
 
 
@@ -24,6 +23,7 @@ class PSO:
         self.delta = delta
         self.epsilon = epsilon
         self.pop = []
+        self.fitness = 99999999
         for _ in range(swarm_size):
             initial_position = np.random.random_sample((dimension_size,)) * 2 - 1
             initial_velocity = np.zeros(dimension_size)
@@ -42,6 +42,7 @@ class PSO:
             new_ann.feed_forward()
             print(new_ann.output)
             fitness = (np.sum((y - new_ann.output) ** 2)) / 4
+            self.fitness = fitness
             print(fitness)
 
             if self.best_fitness_value is None or fitness < self.best_fitness_value:
