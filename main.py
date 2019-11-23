@@ -9,20 +9,21 @@ if __name__ == "__main__":
                   [0, 1, 1],
                   [1, 0, 1],
                   [1, 1, 1]])
-    y = np.array([[0], [1], [1], [0]])
+    Y = np.array([[0], [1], [1], [0]])
 
-    ann = NeuralNetwork(X, y, [(4, sigmoid), (1, sigmoid)])
+    layers = [(4, sigmoid), (1, sigmoid)]
+    ann = NeuralNetwork(X, Y, layers)
 
-    pso = PSO(len(ann.get_weights_as_vector()), 50, 0.5, 2.0, 2.0, 1.0)
+    pso = PSO(len(ann.get_weights_as_vector()), 100, 0.5, 2.0, 2.0, 1.0)
 
-    while pso.fitness != 0:
-        pso.train()
-    new_ann = NeuralNetwork(X, y, [(4, sigmoid), (1, sigmoid)], list(pso.best))
-    print("THIS =", list(pso.best))
-    print("AND THIS =", new_ann.weights)
+    for _ in range(100):
+        pso.train(X, Y, layers)
+    new_ann = NeuralNetwork(X, Y, [(4, sigmoid), (1, sigmoid)], list(pso.best))
     new_ann.feed_forward()
-    print(new_ann.output)
+    print("PSO BEST =")
     print(pso.best)
+    print("FINAL ANN OUTPUT =")
+    print(new_ann.output)
 
     """
     [ 0.04959152  0.61688732  0.96189469  0.01402569 -0.29641678 -0.9668396

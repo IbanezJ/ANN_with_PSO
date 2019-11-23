@@ -31,19 +31,14 @@ class PSO:
         self.best = None
         self.best_fitness_value = None
 
-    def train(self):
+    def train(self, X, Y, layers):
         for particle in self.pop:
-            X = np.array([[0, 0, 1],
-                          [0, 1, 1],
-                          [1, 0, 1],
-                          [1, 1, 1]])
-            y = np.array([[0], [1], [1], [0]])
-            new_ann = NeuralNetwork(X, y, [(4, sigmoid), (1, sigmoid)], list(particle.pos))
+            new_ann = NeuralNetwork(X, Y, layers, list(particle.pos))
             new_ann.feed_forward()
-            print(new_ann.output)
-            fitness = (np.sum((y - new_ann.output) ** 2)) / 4
+            print("CURRENT ANN OUTPUT =", new_ann.output)
+            fitness = (np.sum((Y - new_ann.output) ** 2)) / 4
             self.fitness = fitness
-            print(fitness)
+            print("CURRENT FITNESS =", fitness)
 
             if self.best_fitness_value is None or fitness < self.best_fitness_value:
                 self.best = particle.pos
