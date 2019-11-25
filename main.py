@@ -74,28 +74,19 @@ def get_ann(inputs, layers, swarm_size, informants_size, velocity_retained, pers
         while x in range(len(desired_output)):
             results.append((desired_output[x][0], ann_output[x][0]))
             x += 1
-        print(results)
+        print("(desired output, actual_output) =", results)
         sum_fitness += pso.best_fitness_value
-    print(sum_fitness / 10)
+    print("fitness_mean =", sum_fitness / 10)
     return new_ann
 
 
 if __name__ == "__main__":
-
-    """
-    X = np.array([[0, 0, 1],
-                  [0, 1, 1],
-                  [1, 0, 1],
-                  [1, 1, 1]])
-    Y = np.array([[0], [1], [1], [0]])
-    """
-
     inputs = readfiles()
-    #get_mean_error(inputs["cubic"], [(10, hyper_tangent), (1, hyper_tangent)], 100, 10, 0.5, 1.655, 1.655, 1)
-    #get_mean_error(inputs["tanh"], [(10, hyper_tangent), (1, hyper_tangent)], 100, 10, 0.5, 1.655, 1.655, 1, 10)
-    #get_mean_error(inputs["sine"], [(25, cosine), (1, cosine)], 100, 10, 0.5, 1.655, 1.655, 0.1, 100)
-    #get_mean_error(inputs["linear"], [(4, sigmoid), (1, sigmoid)], 100, 10, 1, 0, 4, 0.1, 100)
-    #get_mean_error(inputs["xor"], [(2, sigmoid), (1, sigmoid)], 100, 10, 0.5, 1.655, 1.655, 1)
-    get_ann(inputs["complex"], [(2, sigmoid), (1, sigmoid)], 100, 10, 0.5, 1.655, 1.655, 1, 100)
+    get_ann(inputs["cubic"], [(10, hyper_tangent), (1, hyper_tangent)], 100, 10, 0.5, 1.655, 1.655, 1, 100)
+    get_ann(inputs["tanh"], [(10, hyper_tangent), (1, hyper_tangent)], 100, 10, 0.5, 1.655, 1.655, 1, 100)
+    get_ann(inputs["linear"], [(10, hyper_tangent), (1, hyper_tangent)], 100, 10, 0.5, 2, 2, 0.1, 100)
+    get_ann(inputs["sine"], [(10, hyper_tangent), (1, hyper_tangent)], 100, 10, 0.1, 3, 1, 1, 100)
+    get_ann(inputs["xor"], [(10, gaussian), (1, gaussian)], 100, 10, 0.5, 1.655, 1.655, 0.1, 100)
+    get_ann(inputs["complex"], [(10, hyper_tangent), (1, hyper_tangent)], 40, 10, 0.5, 2, 2, 1, 100)
 
 
